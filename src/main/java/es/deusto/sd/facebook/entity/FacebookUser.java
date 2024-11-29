@@ -4,7 +4,6 @@ public class FacebookUser {
 
     private String email;
     private String password;
-    private String name;
 
     // Constructor, getters, and setters
     public FacebookUser(String email, String password) {
