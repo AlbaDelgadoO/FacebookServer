@@ -5,9 +5,18 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class FacebookServer {
     private static final int SERVER_PORT = 8081;
+    protected static final HashMap<String, String> userDatabase = new HashMap<>();
+
+    static {
+        // Prepopulate with some sample users
+        userDatabase.put("unai@facebook.com", "password1");
+        userDatabase.put("bolsonaro@politics.com", "password2");
+        userDatabase.put("paco@lopez.com", "password3");
+    }    
     
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
@@ -46,7 +55,7 @@ class FacebookService extends Thread {
         try {
             // Read the email and password sent by Strava
             String credentials = in.readUTF();
-            System.out.println("Received credentials: " + credentials);  // Log the credentials
+            //System.out.println("Received credentials: " + credentials);  // Log the credentials
 
             String[] parts = credentials.split("#");
             String email = parts[0];
@@ -73,6 +82,8 @@ class FacebookService extends Thread {
     }
 
     private boolean authenticateWithFacebook(String email, String password) {
-        return true;
+        // Check if the email exists and the password matches
+        String storedPassword = FacebookServer.userDatabase.get(email);
+        return storedPassword != null && storedPassword.equals(password);    
     }
 }
