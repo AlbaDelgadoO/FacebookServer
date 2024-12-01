@@ -16,6 +16,8 @@ public class FacebookServer {
         userDatabase.put("unai@facebook.com", "password1");
         userDatabase.put("bolsonaro@politics.com", "password2");
         userDatabase.put("paco@lopez.com", "password3");
+        userDatabase.put("prueba1@facebook.com", "password4");
+        userDatabase.put("prueba2@facebook.com", "password5");
     }    
     
     public static void main(String[] args) {
@@ -84,6 +86,6 @@ class FacebookService extends Thread {
     private boolean authenticateWithFacebook(String email, String password) {
         // Check if the email exists and the password matches
         String storedPassword = FacebookServer.userDatabase.get(email);
-        return storedPassword != null && storedPassword.equals(password);    
+        return storedPassword != null && storedPassword.equals(password);   
     }
 }
